@@ -6,7 +6,7 @@ class Date
     private int month;
     private int year;
 
-    public Date(int day, int month, int year)
+    public Date(int day, int month, int year) //Добавь возможность работы со временем
     {
         this.day = day;
         this.month = month;
@@ -52,7 +52,7 @@ class Date
     }
 
     // Статический метод для получения даты из строки
-    public static Date Parse(string dateString)
+    public static Date Parse(string dateString) //Добавm возможности работы с интервалами времени
     {
         DateTime dateTime = DateTime.ParseExact(dateString, "dd.MM.yyyy", null);
         return new Date(dateTime.Day, dateTime.Month, dateTime.Year);
