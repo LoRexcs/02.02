@@ -59,7 +59,7 @@ class Date
     }
 
     // Метод для получения текущей даты
-    public static Date GetCurrentDate()
+    public static Date GetCurrentDate() 
     {
         DateTime currentDate = DateTime.Now;
         return new Date(currentDate.Day, currentDate.Month, currentDate.Year);
@@ -130,7 +130,7 @@ class Program
         Console.WriteLine($"Дата из строки: {parsedDate}");
 
         // Пример использования новых методов
-        Date currentDate = Date.GetCurrentDate();
+        Date currentDate = Date.GetCurrentDate(); //Добавлены новые возможности кода
         Date currentTime = Date.GetCurrentTime();
 
         Console.WriteLine($"Текущая дата: {currentDate}");
