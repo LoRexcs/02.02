@@ -6,7 +6,7 @@ class Date
     private int month;
     private int year;
 
-    public Date(int day, int month, int year) //Добавь возможность работы со временем
+    public Date(int day, int month, int year)
     {
         this.day = day;
         this.month = month;
@@ -52,10 +52,39 @@ class Date
     }
 
     // Статический метод для получения даты из строки
-    public static Date Parse(string dateString) //Добавm возможности работы с интервалами времени
+    public static Date Parse(string dateString)
     {
         DateTime dateTime = DateTime.ParseExact(dateString, "dd.MM.yyyy", null);
         return new Date(dateTime.Day, dateTime.Month, dateTime.Year);
+    }
+
+    // Метод для получения текущей даты
+    public static Date GetCurrentDate()
+    {
+        DateTime currentDate = DateTime.Now;
+        return new Date(currentDate.Day, currentDate.Month, currentDate.Year);
+    }
+
+    // Метод для получения текущего времени
+    public static Date GetCurrentTime()
+    {
+        DateTime currentTime = DateTime.Now;
+        return new Date(currentTime.Hour, currentTime.Minute, currentTime.Second);
+    }
+
+    // Метод для получения количества дней между двумя датами
+    public static int GetDaysInInterval(Date startDate, Date endDate)
+    {
+        TimeSpan interval = new DateTime(endDate.year, endDate.month, endDate.day) -
+                            new DateTime(startDate.year, startDate.month, startDate.day);
+        return (int)interval.TotalDays;
+    }
+
+    // Метод для получения количества месяцев между двумя датами
+    public static int GetMonthsInInterval(Date startDate, Date endDate)
+    {
+        int monthsApart = ((endDate.year - startDate.year) * 12) + (endDate.month - startDate.month);
+        return Math.Abs(monthsApart);
     }
 }
 
@@ -99,5 +128,21 @@ class Program
         string dateString = "20.06.2024";
         Date parsedDate = Date.Parse(dateString);
         Console.WriteLine($"Дата из строки: {parsedDate}");
+
+        // Пример использования новых методов
+        Date currentDate = Date.GetCurrentDate();
+        Date currentTime = Date.GetCurrentTime();
+
+        Console.WriteLine($"Текущая дата: {currentDate}");
+        Console.WriteLine($"Текущее время: {currentTime}");
+
+        Date startDate = new Date(1, 1, 2024);
+        Date endDate = new Date(31, 12, 2024);
+
+        int daysInInterval = Date.GetDaysInInterval(startDate, endDate);
+        int monthsInInterval = Date.GetMonthsInInterval(startDate, endDate);
+
+        Console.WriteLine($"Дней в интервале: {daysInInterval}");
+        Console.WriteLine($"Месяцев в интервале: {monthsInInterval}");
     }
 }
